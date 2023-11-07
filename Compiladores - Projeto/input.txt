@@ -25,11 +25,7 @@ int dobrar(int x) {
  de múltiplas linhas. */
  return x * 2;
 }
-void imprimirValores(int valores[]) {
- for (int i = 0; i < valores.length; i++) {
- println("Valor[" + i + "] = " + valores[i]);
- }
-}
+
 
 
 

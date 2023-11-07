@@ -3,9 +3,9 @@ import re
 patterns = [
     (r'\d+', 'NUM_INT'),
     (r'\d+\.\d+', 'NUM_DEC'),
+    (r'float|int|char|boolean|void|if|else|for|while|scanf|println|main|return', 'PALAVRA_RESERVADA'),
     (r'[a-zA-Z_]\w*', 'ID'),
     (r'"[^"]*"', 'TEXTO'),
-    (r'int|float|char|boolean|void|if|else|for|while|scanf|println|main|return', 'PALAVRA_RESERVADA'),
     (r'\/\/[^\n]*', 'COMENTARIO_UMA_LINHA'),
     (r'\/\*[\s\S]*?\*\/', 'COMENTARIO_MULTI_LINHA'),
     (r'\+|-|\*|\/|%|&&|\|\||!|>|>=|<|<=|!=|==|=|\(|\)|\[|\]|\{|\}|.|;', 'OPERADOR'),
@@ -19,9 +19,7 @@ def tokenize(code):
             match = re.match(pattern, code, re.DOTALL)
             if match:
                 lexeme = match.group(0)
-                if token_type == 'ID' and lexeme == 'length':
-                    raise SyntaxError('"length" não é permitido.')
-                if token_type != 'COMENTARIO_MULTI_LINHA':
+                if token_type != 'ID':
                     tokens.append((lexeme, token_type))
                 code = code[len(lexeme):].lstrip()
                 break
@@ -36,7 +34,7 @@ def ler_codigo_de_arquivo(nome_arquivo):
     return codigo
 
 # Ler código-fonte de um arquivo chamado "input.txt"
-nome_arquivo = 'input.txt'
+nome_arquivo = 'Compiladores - Projeto\input.txt'
 try:
     codigo_fonte = ler_codigo_de_arquivo(nome_arquivo)
     tokens = tokenize(codigo_fonte)
@@ -46,3 +44,4 @@ except FileNotFoundError:
     print(f'Arquivo "{nome_arquivo}" não encontrado.')
 except SyntaxError as e:
     print(f'Erro de sintaxe: {e}')
+
