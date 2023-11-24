@@ -1,0 +1,205 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    BOOL
+    BOOLEAN_PALAVRA_RESERVADA
+    CHAR_PALAVRA_RESERVADA
+    DECIMAL_NUMBER
+    FLOAT_PALAVRA_RESERVADA
+    INTEGER_NUMBER
+    INT_PALAVRA_RESERVADA
+    MAIN_PALAVRA_RESERVADA
+    OPERATOR
+    PRINTLN_PALAVRA_RESERVADA
+    SCANF_PALAVRA_RESERVADA
+    SPECIAL_SYMBOL
+    STRING
+    VOID_PALAVRA_RESERVADA
+
+Grammar
+
+Rule 0     S' -> parametros
+Rule 1     parametros -> parametro
+Rule 2     parametros -> parametro COMMA parametros
+Rule 3     expression -> expression MINUS expression
+Rule 4     expression -> MINUS expression
+Rule 5     bloco -> LBRACKET declaracao_lista RBRACKET
+Rule 6     declaracao_lista -> declaracao declaracao_lista
+Rule 7     declaracao_lista -> empty
+Rule 8     comentario -> COMMENT
+Rule 9     comentario -> COMMENT_MULTI
+Rule 10    atribuicao -> ID EQUALS expressao
+Rule 11    atribuicao -> ID PLUS_EQUAL expressao
+Rule 12    atribuicao -> ID MINUS_EQUAL expressao
+Rule 13    atribuicao -> ID TIMES_EQUAL expressao
+Rule 14    atribuicao -> ID DIVIDE_EQUAL expressao
+Rule 15    atribuicao -> ID MOD_EQUAL expressao
+Rule 16    atribuicao -> ID AND_EQUAL expressao
+Rule 17    atribuicao -> ID OR_EQUAL expressao
+Rule 18    atribuicao -> ID EQUALS ID
+Rule 19    atribuicao -> ID PLUS_EQUAL ID
+Rule 20    atribuicao -> ID MINUS_EQUAL ID
+Rule 21    atribuicao -> ID TIMES_EQUAL ID
+Rule 22    atribuicao -> ID DIVIDE_EQUAL ID
+Rule 23    atribuicao -> ID MOD_EQUAL ID
+Rule 24    atribuicao -> ID AND_EQUAL ID
+Rule 25    atribuicao -> ID OR_EQUAL ID
+Rule 26    estrutura_controle -> IF_PALAVRA_RESERVADA LPAREN expressao RPAREN bloco
+Rule 27    estrutura_controle -> IF_PALAVRA_RESERVADA LPAREN expressao RPAREN bloco ELSE_PALAVRA_RESERVADA bloco
+Rule 28    estrutura_controle -> WHILE_PALAVRA_RESERVADA LPAREN expressao RPAREN bloco
+Rule 29    estrutura_controle -> FOR_PALAVRA_RESERVADA LPAREN expressao SEMICOLON expressao SEMICOLON expressao RPAREN bloco
+Rule 30    estrutura_controle -> SWITCH_PALAVRA_RESERVADA LPAREN expressao RPAREN case_lista
+Rule 31    case_lista -> case_decl case_lista
+Rule 32    case_lista -> empty
+Rule 33    case_decl -> CASE_PALAVRA_RESERVADA expressao COLON bloco
+Rule 34    case_decl -> DEFAULT_PALAVRA_RESERVADA COLON bloco
+Rule 35    estrutura_controle -> BREAK_PALAVRA_RESERVADA SEMICOLON
+Rule 36    estrutura_controle -> CONTINUE_PALAVRA_RESERVADA SEMICOLON
+Rule 37    estrutura_controle -> RETURN_PALAVRA_RESERVADA expressao SEMICOLON
+Rule 38    declaracao_estrutura -> STRUCT ID LBRACKET corpo_estrutura RBRACKET SEMICOLON
+Rule 39    corpo_estrutura -> declaracao_variavel corpo_estrutura
+Rule 40    corpo_estrutura -> empty
+Rule 41    declaracao_variavel -> tipo ID SEMICOLON
+Rule 42    declaracao_variavel -> tipo ID LBRACKET RBRACKET SEMICOLON
+Rule 43    array -> ID LBRACKET expressao RBRACKET
+Rule 44    array -> ID LBRACKET RBRACKET
+Rule 45    array_inicializacao -> LBRACKET expressao_lista RBRACKET
+Rule 46    expressao_lista -> expressao
+Rule 47    expressao_lista -> expressao_lista COMMA expressao
+Rule 48    expressao_logica -> expressao_relacional
+Rule 49    expressao_logica -> expressao_logica AND expressao_relacional
+Rule 50    expressao_logica -> expressao_logica OR expressao_relacional
+Rule 51    expressao_logica -> NOT expressao_relacional
+Rule 52    expressao_relacional -> expressao_aritmetica
+Rule 53    expressao_relacional -> expressao_aritmetica LESS_THAN expressao_aritmetica
+Rule 54    expressao_relacional -> expressao_aritmetica GREATER_THAN expressao_aritmetica
+Rule 55    expressao_relacional -> expressao_aritmetica LESS_THAN_EQUAL expressao_aritmetica
+Rule 56    expressao_relacional -> expressao_aritmetica GREATER_THAN_EQUAL expressao_aritmetica
+Rule 57    expressao_relacional -> expressao_aritmetica NOT_EQUAL expressao_aritmetica
+Rule 58    expressao_relacional -> expressao_aritmetica DOUBLEEQUALS expressao_aritmetica
+Rule 59    expressao_aritmetica -> expressao_multiplicativa
+Rule 60    expressao_aritmetica -> expressao_aritmetica PLUS expressao_multiplicativa
+Rule 61    expressao_aritmetica -> expressao_aritmetica MINUS expressao_multiplicativa
+Rule 62    expressao_multiplicativa -> expressao_unaria
+Rule 63    expressao_multiplicativa -> expressao_multiplicativa ASTERISC expressao_unaria
+Rule 64    expressao_multiplicativa -> expressao_multiplicativa SLASH expressao_unaria
+Rule 65    expressao_multiplicativa -> expressao_multiplicativa PERCENT expressao_unaria
+Rule 66    expressao_unaria -> expressao_postfix
+Rule 67    expressao_unaria -> MINUS expressao_unaria
+Rule 68    expressao_unaria -> PLUS expressao_unaria
+Rule 69    expressao_unaria -> INCREMENT expressao_postfix
+Rule 70    expressao_unaria -> DECREMENT expressao_postfix
+Rule 71    expressao_postfix -> primaria
+Rule 72    expressao_postfix -> primaria LBRACKET expressao RBRACKET
+Rule 73    expressao_postfix -> primaria LPAREN argumentos RPAREN
+Rule 74    expressao_postfix -> primaria DOT ID
+Rule 75    expressao_postfix -> primaria ARROW ID
+Rule 76    argumentos -> expressao_lista
+Rule 77    argumentos -> empty
+Rule 78    primaria -> ID
+Rule 79    primaria -> NUM_INT
+Rule 80    primaria -> NUM_DEC
+Rule 81    primaria -> TEXTO
+Rule 82    primaria -> LPAREN expressao RPAREN
+Rule 83    empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 49
+ASTERISC             : 63
+BOOL                 : 
+BOOLEAN_PALAVRA_RESERVADA : 
+CHAR_PALAVRA_RESERVADA : 
+COMMA                : 2 47
+COMMENT              : 8
+COMMENT_MULTI        : 9
+DECIMAL_NUMBER       : 
+DOUBLEEQUALS         : 58
+ELSE_PALAVRA_RESERVADA : 27
+EQUALS               : 10 18
+FLOAT_PALAVRA_RESERVADA : 
+FOR_PALAVRA_RESERVADA : 29
+GREATER_THAN         : 54
+GREATER_THAN_EQUAL   : 56
+ID                   : 10 11 12 13 14 15 16 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 38 41 42 43 44 74 75 78
+IF_PALAVRA_RESERVADA : 26 27
+INTEGER_NUMBER       : 
+INT_PALAVRA_RESERVADA : 
+LBRACKET             : 5 38 42 43 44 45 72
+LESS_THAN            : 53
+LESS_THAN_EQUAL      : 55
+LPAREN               : 26 27 28 29 30 73 82
+MAIN_PALAVRA_RESERVADA : 
+MINUS                : 3 4 61 67
+NOT                  : 51
+NOT_EQUAL            : 57
+OPERATOR             : 
+OR                   : 50
+PERCENT              : 65
+PLUS                 : 60 68
+PRINTLN_PALAVRA_RESERVADA : 
+RBRACKET             : 5 38 42 43 44 45 72
+RETURN_PALAVRA_RESERVADA : 37
+RPAREN               : 26 27 28 29 30 73 82
+SCANF_PALAVRA_RESERVADA : 
+SEMICOLON            : 29 29 35 36 37 38 41 42
+SLASH                : 64
+SPECIAL_SYMBOL       : 
+STRING               : 
+VOID_PALAVRA_RESERVADA : 
+WHILE_PALAVRA_RESERVADA : 28
+error                : 
+
+Nonterminals, with rules where they appear
+
+AND_EQUAL            : 16 24
+ARROW                : 75
+BREAK_PALAVRA_RESERVADA : 35
+CASE_PALAVRA_RESERVADA : 33
+COLON                : 33 34
+CONTINUE_PALAVRA_RESERVADA : 36
+DECREMENT            : 70
+DEFAULT_PALAVRA_RESERVADA : 34
+DIVIDE_EQUAL         : 14 22
+DOT                  : 74
+INCREMENT            : 69
+MINUS_EQUAL          : 12 20
+MOD_EQUAL            : 15 23
+NUM_DEC              : 80
+NUM_INT              : 79
+OR_EQUAL             : 17 25
+PLUS_EQUAL           : 11 19
+STRUCT               : 38
+SWITCH_PALAVRA_RESERVADA : 30
+TEXTO                : 81
+TIMES_EQUAL          : 13 21
+argumentos           : 73
+array                : 
+array_inicializacao  : 
+atribuicao           : 
+bloco                : 26 27 27 28 29 33 34
+case_decl            : 31
+case_lista           : 30 31
+comentario           : 
+corpo_estrutura      : 38 39
+declaracao           : 6
+declaracao_estrutura : 
+declaracao_lista     : 5 6
+declaracao_variavel  : 39
+empty                : 7 32 40 77
+estrutura_controle   : 
+expressao            : 10 11 12 13 14 15 16 17 26 27 28 29 29 29 30 33 37 43 46 47 72 82
+expressao_aritmetica : 52 53 53 54 54 55 55 56 56 57 57 58 58 60 61
+expressao_lista      : 45 47 76
+expressao_logica     : 49 50
+expressao_multiplicativa : 59 60 61 63 64 65
+expressao_postfix    : 66 69 70
+expressao_relacional : 48 49 50 51
+expressao_unaria     : 62 63 64 65 67 68
+expression           : 3 3 4
+parametro            : 1 2
+parametros           : 2 0
+primaria             : 71 72 73 74 75
+tipo                 : 41 42
+
