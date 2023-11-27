@@ -24,7 +24,12 @@ palavras_reservadas = {
     'scanf': 'SCANF_PALAVRA_RESERVADA',
     'println': 'PRINTLN_PALAVRA_RESERVADA',
     'main': 'MAIN_PALAVRA_RESERVADA',
-    'return': 'RETURN_PALAVRA_RESERVADA'
+    'return': 'RETURN_PALAVRA_RESERVADA',
+    'switch': 'SWITCH_PALAVRA_RESERVADA',
+    'break': 'BREAK_PALAVRA_RESERVADA',
+    'continue': 'CONTINUE_PALAVRA_RESERVADA',
+    'case': 'CASE_PALAVRA_RESERVADA',
+    'default': 'DEFAULT_PALAVRA_RESERVADA'
 }
 
 
@@ -46,8 +51,11 @@ OPERADORES_E_SIMBOLOS_E = {
     '!':'NOT',
     '(':'LPAREN',
     ')':'RPAREN',
+    '{':'LKEY',
+    '}':'RKEY',
     '[':'LBRACKET',
     ']':'RBRACKET',
     ',':'COMMA',
-    ';':'SEMICOLON'
+    ';':'SEMICOLON',
+    ':':'TWOPOINTS'
 }

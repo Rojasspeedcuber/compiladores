@@ -19,10 +19,13 @@ t_NOT_EQUAL = r'!='
 t_NOT = r'!'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_LBRACKET = r'\{'
-t_RBRACKET = r'\}'
+t_LKEY = r'\{'
+t_RKEY = r'\}'
+t_LBRACKET = r'\['
+t_RBRACKET = r'\]'
 t_COMMA = r','
 t_SEMICOLON = r';'
+t_TWOPOINTS = r':'
 
 def t_COMMENT(t):
     r'\/\/[^\n]*'
@@ -89,7 +92,9 @@ lexico('compiladores\input.txt')
 tokens = Complemento.TIPOS + list(Complemento.palavras_reservadas.values()) + list(Complemento.OPERADORES_E_SIMBOLOS_E.values())
 
 def p_programa(p):
-    '''programa : declaracao'''
+    '''
+    programa : declaracao
+    '''
 
 def p_declaracao(p):
     '''
@@ -98,9 +103,59 @@ def p_declaracao(p):
     declaracao : declaracao_estrutura
     declaracao : comentario
     declaracao_variavel : tipo ID SEMICOLON | tipo ID EQUALS expressao SEMICOLON
-
+    declaracao_funcao : tipo ID LPAREN parametros RPAREN bloco
+    declaracao_estrutura : struct ID LKEY declaracao_variavel* RKEY SEMICOLON
     '''
-
+def p_bloco(p):
+    '''
+    bloco : LKEY declaracao* RKEY
+    '''
+def p_parametros(p):
+    '''
+    parametros : parametro
+    parametros : parametro COMMA parametros
+    parametro : tipo ID
+    parametro : tipo ID LBRACKET RBRACKET
+    '''
+def p_estruturas_controle(p):
+    '''
+    estrutura_controle : IF_PALAVRA_RESERVADA LPAREN expressao RPAREN bloco
+    estrutura_controle : IF_PALAVRA_RESERVADA LPAREN expressao RPAREN bloco ELSE_PALAVRA_RESERVADA bloco
+    estrutura_controle : WHILE_PALAVRA_RESERVADA LPAREN expressao RPAREN bloco
+    estrutura_controle : FOR_PALAVRA_RESERVADA LPAREN expressao SEMICOLON expressao SEMICOLON expressao RPAREN bloco
+    estrutura_controle : SWITCH_PALAVRA_RESERVADA LPAREN expressao RPAREN case_lista
+    case_lista : case_decl*
+    case_decl : CASE_PALAVRA_RESERVADA expressao TWOPOINTS bloco
+    case_decl : DEFAULT_PALAVRA_RESERVADA TWOPOINTS bloco
+    estrutura_controle : BREAK_PALAVRA_RESERVADA SEMICOLON
+    estrutura_controle : CONTINUE_PALAVRA_RESERVADA SEMICOLON
+    estrutura_controle : RETURN_PALAVRA_RESERVADA expressao SEMICOLON
+    '''
+def p_expressoes(p):
+    '''
+    expressao : atribuicao
+    atribuicao : ID EQUALS expressao
+    atribuicao : ID PLUS EQUALS expressao
+    atribuicao : ID MINUS EQUALS expressao
+    atribuicao : ID ASTERISC EQUALS expressao
+    atribuicao : ID SLASH EQUALS expressao
+    atribuicao : ID PERCENT EQUALS expressao
+    atribuicao : ID AND EQUALS expressao
+    atribuicao : ID OR EQUALS expressao
+    atribuicao : ID EQUALS ID
+    atribuicao : ID PLUS EQUALS ID
+    atribuicao : ID MINUS EQUALS ID
+    atribuicao : ID ASTERISC EQUALS ID
+    atribuicao : ID SLASH EQUALS ID
+    atribuicao : ID PERCENT EQUALS ID
+    atribuicao : ID AND EQUALS ID
+    atribuicao : ID OR EQUALS ID
+    '''
+def p_comentario(p):
+    '''
+    comentario : COMMENT
+    comentario : COMMENT_MULTI
+    '''
 def p_tipo(p):
     '''
     tipo : INT_PALAVRA_RESERVADA | FLOAT_PALAVRA_RESERVADA | DOUBLE_PALAVRA_RESERVADA | CHAR_PALAVRA_RESERVADA | BOOLEAN_PALAVRA_RESERVADA
