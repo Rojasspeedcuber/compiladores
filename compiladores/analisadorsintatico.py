@@ -26,6 +26,8 @@ t_RBRACKET = r'\]'
 t_COMMA = r','
 t_SEMICOLON = r';'
 t_TWOPOINTS = r':'
+t_ARROW = r'->'
+t_DOT = r'.'
 
 def t_COMMENT(t):
     r'\/\/[^\n]*'
@@ -156,6 +158,39 @@ def p_expressoes(p):
     expressao_logica : expressao_logica OR_PALAVRA_RESERVADA expressao_relacional
     expressao_logica : NOT expressao_relacional
     expressao_relacional : expressao_aritmetica
+    expressao_relacional : expressao_aritmetica GREATER_THAN expressao_aritmetica
+    expressao_relacional : expressao_aritmetica GREATER_THAN_EQUAL expressao_aritmetica
+    expressao_relacional : expressao_aritmetica LESS_THAN expressao_aritmetica
+    expressao_relacional : expressao_aritmetica GREATER_THAN_EQUAL expressao_aritmetica
+    expressao_relacional : expressao_aritmetica NOT_EQUAL expressao_aritmetica
+    expressao_relacional : expressao_aritmetica DOUBLEEQUALS expressao_aritmetica
+    expressao_aritmetica : expressao_multiplicativa
+                       | expressao_aritmetica PLUS expressao_multiplicativa
+                       | expressao_aritmetica MINUS expressao_multiplicativa
+    expressao_multiplicativa : expressao_unaria
+                          | expressao_multiplicativa ASTERISC expressao_unaria
+                          | expressao_multiplicativa SLASH expressao_unaria
+                          | expressao_multiplicativa PERCENT expressao_unaria
+    expressao_unaria : expressao_postfix
+                   | MINUS expressao_unaria
+                   | PLUS expressao_unaria
+                   | PLUS PLUS expressao_postfix
+                   | MINUS MINUS expressao_postfix
+    expressao_postfix : primaria
+                   | primaria LBRACKET expressao RBRACKET
+                   | primaria LPAREN argumentos RPAREN
+                   | primaria DOT ID
+                   | primaria ARROW ID
+    argumentos : expressao_lista
+              | vazio
+    primaria : ID
+            | NUM_INT
+            | NUM_DEC
+            | TEXTO
+            | LPAREN expressao RPAREN
+    expressao_lista : expressao_lista COMMA expressao
+                   | expressao
+                   | vazio
     '''
 def p_comentario(p):
     '''

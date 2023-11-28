@@ -57,5 +57,7 @@ OPERADORES_E_SIMBOLOS_E = {
     ']':'RBRACKET',
     ',':'COMMA',
     ';':'SEMICOLON',
-    ':':'TWOPOINTS'
+    ':':'TWOPOINTS',
+    '->':'ARROW',
+    '.':'DOT'
 }
