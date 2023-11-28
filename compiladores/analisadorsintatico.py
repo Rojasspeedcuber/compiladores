@@ -150,6 +150,12 @@ def p_expressoes(p):
     atribuicao : ID PERCENT EQUALS ID
     atribuicao : ID AND EQUALS ID
     atribuicao : ID OR EQUALS ID
+    expressao : expressao_logica
+    expressao_logica : expressao_relacional
+    expressao_logica : expressao_logica AND_PALAVRA_RESERVADA expressao_relacional
+    expressao_logica : expressao_logica OR_PALAVRA_RESERVADA expressao_relacional
+    expressao_logica : NOT expressao_relacional
+    expressao_relacional : expressao_aritmetica
     '''
 def p_comentario(p):
     '''
